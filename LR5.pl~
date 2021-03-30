@@ -15,7 +15,7 @@ binaryPredicat(X):-
 	write(C).
 
 hexadecimalPredicat(X):-
-	C is X*16,
-	binaryPredicat(C).
+	X1 is X*16,
+	binaryPredicat(X1).
 
 
