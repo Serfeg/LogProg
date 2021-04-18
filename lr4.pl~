@@ -37,6 +37,27 @@ sumlist([H|T],Sum,N):- sumlist(T,Sum1,N1),
 	N is N1+1.
 
 
+sumlist2([],S,S).
+sumlist2([H|T],S2,S):- S1 is H+S2,
+	sumlist2(T,S1,S).
+
+
+quant_4(L,N):- quant_4(L, [], N).
+quant_4([],_,0).
+quant_4([H|T], S, N) :- not(member(H, S)),not(member(H,T)), quant_4(T, [H|S], N1), N is N1+1.
+
+
+add_lists([], _, []) :- !.
+add_lists(_, [], []).
+add_lists([H1|T1], [H2|T2], [H|T]) :-
+    H is H1 + H2,
+    add_lists(T1, T2, T).
+delete_element2(_,[],[]):-!.
+delete_element2(X,[H|T],PTail):- H = X,!,delete_element2(X,T,PTail).
+delete_element2(X,[H|T],[H|PTail]):- delete_element2(X,T,PTail).
+
+
+
 
 
 
