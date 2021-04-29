@@ -1,0 +1,1 @@
+forma1(P,DispName,X,Y):- new(P, dialog('Save me')),send(P, display, text(DispName), point(X,Y)), send(P, append, button('Click me',message(P,display, text('Проверка'),point(X+60,Y-24)))), send(P, append, button(quit,message(P,destroy))), send(P, open).

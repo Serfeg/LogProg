@@ -42,10 +42,12 @@ sumlist2([H|T],S2,S):- S1 is H+S2,
 	sumlist2(T,S1,S).
 
 
-quant_4(L,N):- quant_4(L, [], N).
-quant_4([],_,0).
-quant_4([H|T], S, N) :- not(member(H, S)),not(member(H,T)), quant_4(T, [H|S], N1), N is N1+1.
-
+quant_4([],0):- !.
+quant_4([H|T],N):- member(H,T),
+	delete(T,H,T1),
+	quant_4(T1,N1),
+	N is N1+1.
+quant_4([_|T],N):- quant_4(T,N).
 
 add_lists([], _, []) :- !.
 add_lists(_, [], []).
