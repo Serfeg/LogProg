@@ -6,17 +6,15 @@ citizen('Бенько','Надежда','Владиславовна','2000-02-18','Ж','Ленина 32','0413','
 
 
 %А
-list(X,L):-findall(X,citizen(X,_,_,_,_,_,_,_,_,_),L).
+listSurname(X,L):-findall(X,citizen(X,_,_,_,_,_,_,_,_,_),L).
 writeCitizen([H|T]):-citizen(H,I,O,B,G,A,SP,NP,S,FIO),write(citizen(H,I,O,B,G,A,SP,NP,S,FIO)),nl,writeCitizen(T).
-citizenBySurname(F):-list(F,Y),sort(Y,Z),writeCitizen(Z).
+citizenBySurname(F):-listSurname(F,Y),sort(Y,Z),writeCitizen(Z).
 
 
 %М
-get_year1(X,Year):-parse_time(X,Stamp),
-    stamp_date_time(Stamp, Z, 'UTC'),
-    Z = date(Year,_,_,_,_,_,_,_,_).
-
-list1(X,L):-findall(X,citizen(_,_,_,X,_,_,_,_,_,_),L).
-get_year_list([H|T],[H1|R]):-get_year1(H,Year), H1 is Year, get_year_list(T,R).
+listBirth(X,L):-findall(X,citizen(_,_,_,X,_,_,_,_,_,_),L).
 writeOldestCitizen([H|_]):-citizen(F,I,O,H,G,A,SP,NP,S,FIO),write(citizen(F,I,O,H,G,A,SP,NP,S,FIO)).
-oldestCitizen(B):-list1(B,Y),sort(Y,Z),writeOldestCitizen(Z).
+oldestCitizen(B):-listBirth(B,Y),sort(Y,Z),writeOldestCitizen(Z).
+
+%E
+noFamily:-citizen(F,I,O,B,G,A,SP,NP,S,FIO), ((S = 'Не женат'; S = 'Не замужем'),!), write(citizen(F,I,O,B,G,A,SP,NP,S,FIO)).

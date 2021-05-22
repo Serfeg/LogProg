@@ -15,3 +15,7 @@ citizenBySurname(F):-listSurname(F,Y),sort(Y,Z),writeCitizen(Z).
 listBirth(X,L):-findall(X,citizen(_,_,_,X,_,_,_,_,_,_),L).
 writeOldestCitizen([H|_]):-citizen(F,I,O,H,G,A,SP,NP,S,FIO),write(citizen(F,I,O,H,G,A,SP,NP,S,FIO)).
 oldestCitizen(B):-listBirth(B,Y),sort(Y,Z),writeOldestCitizen(Z).
+
+
+%E
+noFamily:-citizen(F,I,O,B,G,A,SP,NP,S,FIO), ((S = 'Не женат'; S = 'Не замужем'),!), write(citizen(F,I,O,B,G,A,SP,NP,S,FIO)).
