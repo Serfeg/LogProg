@@ -44,7 +44,7 @@ sumlist2([H|T],S2,S):- S1 is H+S2,
 
 quant_4([],0):- !.
 quant_4([H|T],N):- member(H,T),
-	delete_element1(T,H,T1),
+	delete(T,H,T1),
 	quant_4(T1,N1),
 	N is N1+1.
 quant_4([_|T],N):- quant_4(T,N).
@@ -59,11 +59,13 @@ delete_element2(_,[],[]):-!.
 delete_element2(X,[H|T],PTail):- H = X,!,delete_element2(X,T,PTail).
 delete_element2(X,[H|T],[H|PTail]):- delete_element2(X,T,PTail).
 
-delete_element1(_,[],[]).
-delete_element1(H,[H|T],T):- !.
-delete_element1(X,[H|T],[H|T2]):-delete_element1(X,T,T2).
 
-
+list([], _, []).
+list([H | T1], H2, [H | T]) :-
+    member(H, H2),
+    list(T1, H2, T).
+list([_ | T1], H2, T) :-
+    list(T1, H2, T).
 
 
 

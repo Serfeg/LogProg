@@ -60,6 +60,12 @@ delete_element2(X,[H|T],PTail):- H = X,!,delete_element2(X,T,PTail).
 delete_element2(X,[H|T],[H|PTail]):- delete_element2(X,T,PTail).
 
 
+list([], _, []).
+list([H | T], L, [H | T1]) :-
+    member(H, L),
+    list(T, L, T1).
+list([_ | T], L, T1) :-
+    list(T, L, T1).
 
 
 
